@@ -1,4 +1,4 @@
-# ![](https://ga-dash.s3.amazonaws.com/production/assets/logo-9f88ae6c9c3871690e33280fcf557f33.png) Capstone - Music Generation via Machine Learning
+# ![](https://ga-dash.s3.amazonaws.com/production/assets/logo-9f88ae6c9c3871690e33280fcf557f33.png) Music Generation via Machine Learning Project
 
 ## Executive Summary
 
@@ -18,31 +18,28 @@ Humans tend to recognize relative relationships, not absolute physical values. A
 ### Musical notes
 In music, a note is a symbol denoting a musical sound.  Notes can represent the pitch and duration of a sound in musical notation.  Notes can be thought of as the building blocks for written music, and help with its comprehension and analysis.
 
-
 ## Software Requirements
 * Numpy
 * Matplotlib
 * Sklearn
 * Keras
 * Music21
-* MuseScore3
+* MuseScore3(In conjunctin with Music21,enables the notes to be displayed in musical sheet format)
 
 ### Music21
 The project uses the music21 library in order to help parse out the notes in the data set.  It is also a useful library in order to do EDA around musical concepts such as the distribution of frequencies, and the proportionality as to which a note is used within a given measure.  
 
-## MuseScore 3 enables
-
 ## Description of Dataset
 
-The dataset is comprised of midi files scraped from https://bushgrafts.com/midi/.  These midi files are of the jazz genre, while 301 files were scraped some of them need to be reformatted in order to go through the processing via the music 21 library. The dataset also includes 295 classical music midi files that were found on kaggle here, https://www.kaggle.com/soumikrakshit/classical-music-midi.
+The dataset is comprised of midi files scraped from https://bushgrafts.com/midi/.  These midi files are of the jazz genre, while 301 files were scraped some of them need to be reformatted in order to go through the processing via the music 21 library. This leaves 214 midi jazz files to work with.  Additionally, the dataset also includes 295 classical music midi files that were found on kaggle here, https://www.kaggle.com/soumikrakshit/classical-music-midi.
 
 ## Data Visualizations & Analysis
 
-Taking advantage of music21  
+### Distribution of notes by Frequency
+
 ![Distribution of Notes](./images/1stdistplot.png "1st distribution plot")
 This is the first of a few visualizations which show how big the disparity there is for low frequency notes versus higher frequency notes.  Although this only includes 47 classical works, we will see this shift when we add in more songs.  
 
-### Distribution of notes by Frequency
 
 ![Distribution of Notes(II)](./images/2nddistplot.png "2nd Distribution Plot")
 
@@ -78,10 +75,15 @@ These plots show the presence of keys across the first 20 measures of the partic
 
 ## Finding the right model
 
-Upon researching this project it seems that some of the best methodologies for generating new music is by using the music21 library.  In music21 we can parse through notes, process the data and assign each note a unique integer. This then allows us to prepare input and output sequences that we can feed neural networks.  This project uses a CNN model of wave net architecture and iterates through some parameters to see if we can minimize for loss. The model uses convolutional layers and it does well with sequential data. This type of model trained a lot faster than those that used LSTM layers.  
+Upon researching this project it seems that some of the best methodologies for generating new music is by using the music21 library.  In music21 we can parse through notes, process the data and assign each note a unique integer. This then allows us to prepare input and output sequences that we can feed neural networks.  
+
+This project uses a CNN model of wave net architecture and iterates through some parameters to see if we can minimize for loss. The model uses convolutional layers and it does well with sequential data. The convolutional layers include dilation that increase the receptive field of a model, while preserving the output shape of the input. This type of model trained a lot faster than those that used LSTM layers.  
 
 The alternative type of model is a RNN model with two LSTM layers that will be iterated through as well.  This type of model also captures the sequential information present in the input sequence, but takes a lot longer to train.
 
+When choosing sparse categorical cross entropy versus categorical entropy, sparse is used due to the formatting of the y being classified in a way that was not one hot encoded.
+
+Being that I am interested in having a model that works well but that will not produce a carbon copy of notes from the original works.  With that said these models aim to rely on val_loss in order to prevent overfitting.  We want to achieve the delicate balance between overfitting and minimizing errors in the model.
 
 
 ### CNN Wavenet  Modeling
@@ -135,3 +137,10 @@ In order to increase the parameters both LSTM layers were increased to 512 units
 ![](./images/ "")
 ![](./images/ "")
 ## Conclusions & Recommendations.
+
+
+
+
+### Next steps
+
+Would love access to more useable data.  Would need to clean up the midi files themselves as some of them have track layers with no data.  It would be a matter of removing the excess layers for these additional songs.  Tried some midi software but was unable to either save the subsequent file as midi or the software had no functionality to view these layers.  Additionally the LSTM model could benefit from an encoder and decoder layer which could potentially improve performance of the model.  
