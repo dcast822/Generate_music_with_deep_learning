@@ -3,7 +3,7 @@
 ## Executive Summary
 
 ## Problem statement
-Work as a data scientist for a manager of artists that depend on music sample backdrops.  The manager is worried about the exponentially increasing expenses with clearing samples for his artists beats. If a model can generate new music from existing jazz works to have a bigger collection from which to sample from in house, we can scale up and create sounds with other genres.  This could really help the finances of the business by decreasing the reliance of those expenditures.  Could even be used to inspire artists in house to aid in creating organic sounds.  
+As a data scientist for a Record Company that utilizes music samples, personnel in accounting are worried about the exponentially increasing expenses with clearing samples for artists beats. They are wondering if a model can generate new music from existing jazz and classical works.  In order to have a bigger collection from which to sample from in house, we can then scale up and create sounds with other genres.  This could really help the finances of the business as we could be decreasing those expenditures that result in clearing samples. We can define success in part by the objective measure of minimizing value loss when creating these models.  Another factor to take into account is how this music is perceived and we can use some objective criteria for that as well such as rhythm, or patterns of notes that sound dynamic.
 
 ## Background research
 
@@ -31,7 +31,7 @@ The project uses the music21 library in order to help parse out the notes in the
 
 ## Description of Dataset
 
-The dataset is comprised of midi files scraped from https://bushgrafts.com/midi/.  These midi files are of the jazz genre, while 301 files were scraped some of them need to be reformatted in order to go through the processing via the music 21 library. This leaves 214 midi jazz files to work with.  Additionally, the dataset also includes 295 classical music midi files that were found on kaggle here, https://www.kaggle.com/soumikrakshit/classical-music-midi.
+The dataset is comprised of midi files scraped from https://bushgrafts.com/midi/.  These midi files are of the jazz genre, while 301 files were scraped some of them need to be reformatted in order to go through the processing via the music 21 library. This leaves 214 midi jazz files to work with.  Additionally, the dataset also includes 295 classical music midi files that were found on kaggle here, https://www.kaggle.com/soumikrakshit/classical-music-midi.  Along with this there are 400 other piano midi files that were supplied for this project.
 
 ## Data Visualizations & Analysis
 
@@ -124,23 +124,40 @@ In order to increase the parameters both LSTM layers were increased to 512 units
 
 
 ![](./images/ "")
-![](./images/ "")
-![](./images/ "")
 
-![](./images/ "")
-![](./images/ "")
-![](./images/ "")
-![](./images/ "")
-![](./images/ "")
-![](./images/ "")
-![](./images/ "")
-![](./images/ "")
-![](./images/ "")
 ## Conclusions & Recommendations.
 
-
-
+It seems like the best performing model is the 4th Wavenet model as it has the lowest  val_loss, 3.20 followed by the 5th wavenet model at 3.21.  While we we were able to generate notes played which in itself can be a small success.  When hearing the compositions that these models come up with, there is a bit of a monotone quality to the composition.  At this moment in time you could not use these pieces as a basis or foundation for other works.  
 
 ### Next steps
 
 Would love access to more useable data.  Would need to clean up the midi files themselves as some of them have track layers with no data.  It would be a matter of removing the excess layers for these additional songs.  Tried some midi software but was unable to either save the subsequent file as midi or the software had no functionality to view these layers.  Additionally the LSTM model could benefit from an encoder and decoder layer which could potentially improve performance of the model.  
+
+## References
+### Music
+
+*  http://davidtemperley.com/wp-content/uploads/2015/11/temperley-mp99.pdf
+* http://extras.humdrum.org/man/keycor/
+* https://en.wikipedia.org/wiki/Musical_note
+* https://web.mit.edu/music21/doc/about/what.html
+* http://musicandcomputersbook.com/
+* https://www.britannica.com/art/music
+
+### Neural networks
+
+* https://www.analyticsvidhya.com/blog/2017/12/fundamentals-of-deep-learning-introduction-to-lstm/#h2_1
+
+* https://www.analyticsvidhya.com/blog/2020/01/how-to-perform-automatic-music-generation/
+
+* https://stats.stackexchange.com/questions/326065/cross-entropy-vs-sparse-cross-entropy-when-to-use-one-over-the-other
+
+* https://stackoverflow.com/questions/63073760/using-dilated-convolution-in-keras
+
+* https://stackoverflow.com/questions/47299624/how-to-understand-loss-acc-val-loss-val-acc-in-keras-model-fitting/47303461
+
+* https://machinelearningmastery.com/loss-and-loss-functions-for-training-deep-learning-neural-networks/
+
+* https://web.mit.edu/music21/doc/index.html
+
+
+* https://towardsdatascience.com/pyzzicato-piano-instrumental-music-generation-using-deep-neural-networks-ed9e89320bf6
