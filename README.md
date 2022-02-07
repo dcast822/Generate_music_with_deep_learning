@@ -1,4 +1,4 @@
-# ![](https://ga-dash.s3.amazonaws.com/production/assets/logo-9f88ae6c9c3871690e33280fcf557f33.png) Music Generation via Machine Learning Project
+# Music Generation via Machine Learning Project
 
 ## Executive Summary
 
@@ -81,8 +81,6 @@ This project uses a CNN model of wave net architecture and iterates through some
 
 The alternative type of model is a RNN model with two LSTM layers that will be iterated through as well.  This type of model also captures the sequential information present in the input sequence, but takes a lot longer to train.
 
-When choosing sparse categorical cross entropy versus categorical entropy, sparse is used due to the formatting of the y being classified in a way that was not one hot encoded.
-
 Being that I am interested in having a model that works well but that will not produce a carbon copy of notes from the original works.  With that said these models aim to rely on val_loss in order to prevent overfitting.  We want to achieve the delicate balance between overfitting and minimizing errors in the model.
 
 
@@ -122,6 +120,22 @@ After both models had the dropout implemented, the loss got worse, therefore the
 ![6th LSTM Model](./images/11_LSTM_model_loss_plot.png "6th LSTM Model")
 In order to increase the parameters both LSTM layers were increased to 512 units.  Since overfitting has not been an issue the dropout was reduced to .01, and the Adam learning rate was reduced to .001.  This resulted in the best performing LSTM model and had the value of the loss function decrease to 3.54461.  
 
+|         Model         |         Val_loss         |
+|:---------------------:|:------------------------:|
+|       Wavenet I       |          3.04633         |
+|       Wavenet II      |          3.69174         |
+|      Wavenet III      |          3.60457         |
+|       Wavenet IV      |          3.20868         |
+|       Wavenet V       |           3.21           |
+|         LSTM I        |          3.69540         |
+|        LSTM II        |          3.61182         |
+|        LSTM III       |          3.64972         |
+|        LSTM IV        |          4.48162         |
+|         LSTM V        |          4.7361          |
+|        LSTM VI        |          3.54461         |
+
+
+
 ## Too underfit
 
 ### 1000 Epochs
@@ -142,7 +156,6 @@ Same idea here, using similar architecture to model 5.  Once again the trend rem
 
 ![](./images/16_wavenet_loss.png "")
 Due to the overfitting I increased the dropout rate to .25 for each layer. However this model was still overfit and its val_loss kept increasing.  Research indicates that the learning rate could be too high, so a future iteration of this model would have to have a lower learning rate and a higher dropout rate.  
-
 
 
 ## Conclusions & Recommendations.
